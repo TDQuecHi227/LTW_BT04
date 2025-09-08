@@ -33,6 +33,11 @@
 </head>
 <body>
 <div class="container my-4">
+    <c:if test="${not empty alert}">
+        <div class="alert alert-warning mb-0">
+            ${alert}
+        </div>
+    </c:if>
     <!-- Header -->
     <div class="page-header d-flex justify-content-between align-items-center">
         <h1 class="h3 m-0">Bảng điều khiển ${nameRole}</h1>

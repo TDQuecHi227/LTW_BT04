@@ -10,4 +10,5 @@ public interface CategoryService {
     void update(Category category);
     void delete(int id);
     Category findById(int id);
+    List<Category> findByUserId(int id);
 }

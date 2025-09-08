@@ -39,11 +39,33 @@ public class CategoryController extends HttpServlet {
                 categoryService.delete(Integer.parseInt(id));
                 resp.sendRedirect(req.getContextPath()+ "/waiting");
             }
+            else{
+                req.setAttribute("alert", "Không có quyền xóa");
+                req.setAttribute("nameRole", user.getUsername());
+                if(user.getUserId() != 2){
+                    req.setAttribute("categoryList", categoryService.findAll());
+                }
+                else{
+                    req.setAttribute("categoryList", categoryService.findByUserId(user.getUserId()));
+                }
+                req.getRequestDispatcher("/views/list.jsp").forward(req, resp);
+            }
         }
         else if (path.equals("/category/edit")) {
             if(role == category.getUser().getRole()) {
                 req.setAttribute("category", category);
                 req.getRequestDispatcher("/views/edit.jsp").forward(req, resp);
+            }
+            else{
+                req.setAttribute("nameRole", user.getUsername());
+                req.setAttribute("alert", "Không có quyền sửa");
+                if(user.getUserId() != 2){
+                    req.setAttribute("categoryList", categoryService.findAll());
+                }
+                else{
+                    req.setAttribute("categoryList", categoryService.findByUserId(user.getUserId()));
+                }
+                req.getRequestDispatcher("/views/list.jsp").forward(req, resp);
             }
         }
     }

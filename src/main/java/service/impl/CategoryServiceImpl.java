@@ -1,5 +1,6 @@
 package service.impl;
 
+import dao.CategoryDao;
 import dao.GenericDao;
 import dao.impl.CategoryDaoImpl;
 import entity.Category;
@@ -8,7 +9,7 @@ import service.CategoryService;
 import java.util.List;
 
 public class CategoryServiceImpl implements CategoryService {
-    GenericDao<Category> categoryDao = new CategoryDaoImpl(Category.class);
+    private final CategoryDao categoryDao = new CategoryDaoImpl(Category.class);
     @Override
     public List<Category> findAll() {
         return categoryDao.findAll();
@@ -33,4 +34,10 @@ public class CategoryServiceImpl implements CategoryService {
     public Category findById(int id) {
         return categoryDao.findById(id);
     }
+
+    @Override
+    public List<Category> findByUserId(int id) {
+        return categoryDao.findByUserId(id);
+    }
+
 }
